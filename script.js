@@ -1,6 +1,6 @@
 // ------------------------------
 // أطلس سوكنة - Atlas Sukna
-// الإصدار الثاني مع البيانات الكاملة
+// الإصدار الكامل والمحدث
 // ------------------------------
 
 // تهيئة الخريطة - إحداثيات سوكنة
@@ -60,7 +60,7 @@ const layers = {
 };
 
 // ========================
-// 3. إضافة المعالم حسب الطبقات (بيانات من ملف Excel)
+// 3. إضافة المعالم حسب الطبقات (بيانات من ملف Excel والنقاط الجديدة)
 // ========================
 
 // ---------- المدن والمناطق (إدارية) ----------
@@ -269,7 +269,69 @@ const historical = [
 historical.forEach(h => L.marker([h.lat, h.lon]).bindPopup(`📜 <b>${h.name}</b><br>${h.type}`).addTo(layers.historical));
 
 // ========================
-// 4. إضافة قائمة التحكم بالطبقات
+// 4. إضافة المعالم الجديدة (قلعة القطيفة، سدود، نقوش، منتزهات، إلخ)
+// ========================
+
+// 1. قلعة القطيفة (تاريخية / قلاع)
+const qalaa = { name: "قلعة القطيفة", lat: 28.8230556, lon: 15.5951667, type: "قلعة أثرية" };
+L.marker([qalaa.lat, qalaa.lon]).bindPopup(`🏰 <b>${qalaa.name}</b><br>${qalaa.type}`).addTo(layers.castles);
+
+// 2. سد الوشكة (الموقع الأول)
+const dam1 = { name: "سد الوشكة", lat: 28.8316944, lon: 15.6241111, type: "سد" };
+L.marker([dam1.lat, dam1.lon]).bindPopup(`🌊 <b>${dam1.name}</b><br>${dam1.type}`).addTo(layers.dams_nature);
+
+// 3. نقوش وادي الصرط (تاريخية)
+const engravings = { name: "نقوش وادي الصرط", lat: 28.8048889, lon: 15.6311111, type: "نقوش صخرية أثرية" };
+L.marker([engravings.lat, engravings.lon]).bindPopup(`📜 <b>${engravings.name}</b><br>${engravings.type}`).addTo(layers.historical);
+
+// 4. وادي الصرط (وادي)
+const wadi = { name: "وادي الصرط", lat: 28.8152778, lon: 15.6286667, type: "وادي" };
+L.marker([wadi.lat, wadi.lon]).bindPopup(`🏞️ <b>${wadi.name}</b><br>${wadi.type}`).addTo(layers.valleys);
+
+// 5. محمية سد وادي الوشكة (طبيعية)
+const reserve = { name: "محمية سد وادي الوشكة", lat: 28.8277716, lon: 15.6243938, type: "محمية طبيعية" };
+L.marker([reserve.lat, reserve.lon]).bindPopup(`🌿 <b>${reserve.name}</b><br>${reserve.type}`).addTo(layers.dams_nature);
+
+// 6. سد الوشكة (الموقع الثاني - قد يكون نفس السد أو نقطة مختلفة)
+const dam2 = { name: "سد الوشكة (منطقة السد)", lat: 28.8323807, lon: 15.6245274, type: "سد" };
+L.marker([dam2.lat, dam2.lon]).bindPopup(`🌊 <b>${dam2.name}</b><br>${dam2.type}`).addTo(layers.dams_nature);
+
+// 7. سد سلطان
+const sultanDam = { name: "سد سلطان", lat: 28.8741631, lon: 15.6034905, type: "سد" };
+L.marker([sultanDam.lat, sultanDam.lon]).bindPopup(`🌊 <b>${sultanDam.name}</b><br>${sultanDam.type}`).addTo(layers.dams_nature);
+
+// 8. نقطة غير مسماة (28.97366, 15.64749) - يرجى تحديد الاسم والنوع
+const unknownPoint = { name: "موقع غير محدد (يرجى التحديد)", lat: 28.9736621, lon: 15.6474882, type: "موقع غير معروف" };
+L.marker([unknownPoint.lat, unknownPoint.lon]).bindPopup(`❓ <b>${unknownPoint.name}</b><br>${unknownPoint.type}<br>تمت إضافته بناءً على رابطك. يرجى توضيح الاسم والتصنيف.`).addTo(layers.services);
+
+// 9. قصر سوكنة الأثري (إذا لم يكن موجوداً بالفعل، نضيفه للتأكيد)
+const palace = { name: "قصر سوكنة الأثري", lat: 29.0675, lon: 15.7828, type: "قصر أثري" };
+L.marker([palace.lat, palace.lon]).bindPopup(`🏛️ <b>${palace.name}</b><br>${palace.type}`).addTo(layers.historical);
+
+// 10. المستشفى القروي
+const ruralHospital = { name: "المستشفى القروي", lat: 29.086497, lon: 15.8105185, type: "مستشفى / مركز صحي" };
+L.marker([ruralHospital.lat, ruralHospital.lon]).bindPopup(`🏥 <b>${ruralHospital.name}</b><br>${ruralHospital.type}`).addTo(layers.health);
+
+// 11. متنزة البكوش السياحي
+const parkBakoush = { name: "متنزة البكوش السياحي", lat: 29.0839802, lon: 15.8506744, type: "منتزه سياحي" };
+L.marker([parkBakoush.lat, parkBakoush.lon]).bindPopup(`🗺️ <b>${parkBakoush.name}</b><br>${parkBakoush.type}`).addTo(layers.tourism);
+
+// 12. منتزه الخريف
+const autumnPark = { name: "منتزه الخريف", lat: 29.0970759, lon: 15.8694781, type: "منتزه / متنزه" };
+L.marker([autumnPark.lat, autumnPark.lon]).bindPopup(`🎉 <b>${autumnPark.name}</b><br>${autumnPark.type}`).addTo(layers.entertainment);
+
+// 13. مشروع عين الحمام الزراعي (سيتم إضافته بإحداثيات تقريبية لسوكنة، يرجى تحديثها لاحقاً)
+const ainhammam = { name: "مشروع عين الحمام الزراعي", lat: 29.0694, lon: 15.7827, type: "مشروع زراعي (موقع تقريبي، يرجى التحديد)" };
+L.marker([ainhammam.lat, ainhammam.lon]).bindPopup(`🌾 <b>${ainhammam.name}</b><br>${ainhammam.type}<br>تمت إضافته بناءً على رابط خرائط Google. يُرجى تزويدي بالإحداثيات الدقيقة لتحديث موقعه.`).addTo(layers.services);
+
+// 14. الباهي للشقق الفندقية
+const bahiApartments = { name: "الباهي للشقق الفندقية", lat: 29.0518929, lon: 15.7805283, type: "شقق فندقية" };
+L.marker([bahiApartments.lat, bahiApartments.lon]).bindPopup(`🏨 <b>${bahiApartments.name}</b><br>${bahiApartments.type}`).addTo(layers.tourism);
+
+console.log("✅ تمت إضافة جميع المعالم بنجاح!");
+
+// ========================
+// 5. إضافة قائمة التحكم بالطبقات
 // ========================
 const overlayControl = {
     "🏛️ إدارية": layers.administrative,
